@@ -1,0 +1,48 @@
+# 下面是一个基础的工作流，你可以基于它来编写自己的 GitHub Actions
+name: CI
+
+# 控制工作流何时运行
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: build rust action
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: stable
+          components: rustfmt
+
+      - name: Format
+        run: cargo fmt --all -- --check
+
+      - name: Build binary
+        run: cargo build --verbose --release
+
+      - name: Strip binary (linux and macos)
+        run: strip "target/release/chipbox"
+
+      - name: Build archive
+        shell: bash
+        run: |
+          mkdir archive
+          cd archive
+          cp "../target/release/chipbox" ./
+          tar -czf "chipbox.tar.gz" chipbox
+
+      - name: Upload archive
+        uses: actions/upload-artifact@v1
+        with:
+          name: chipbox.tar.gz
+          path: archive/chipbox.tar.gz
