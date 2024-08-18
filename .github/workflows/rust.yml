@@ -1,5 +1,5 @@
 # 下面是一个基础的工作流，你可以基于它来编写自己的 GitHub Actions
-name: CI
+name: Rust
 
 # 控制工作流何时运行
 on:
@@ -42,7 +42,7 @@ jobs:
           tar -czf "chipbox.tar.gz" chipbox
 
       - name: Upload archive
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v4
         with:
           name: chipbox.tar.gz
           path: archive/chipbox.tar.gz
