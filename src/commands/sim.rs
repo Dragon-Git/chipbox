@@ -29,7 +29,7 @@ impl SimCommand {
             println!("Sim arg is {}", fpga);
         }
         if let Some(gls) = &self.gls {
-            println!("gls is {}", gls);                
+            println!("gls is {}", gls);
         }
         if let Some(pg) = &self.pg {
             println!("pg is {}", pg);
@@ -39,5 +39,3 @@ impl SimCommand {
         }
     }
 }
-
-
