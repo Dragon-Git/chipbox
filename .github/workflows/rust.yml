@@ -28,21 +28,10 @@ jobs:
         run: cargo fmt --all -- --check
 
       - name: Build binary
-        run: cargo build --verbose --release
-
-      - name: Strip binary (linux and macos)
-        run: strip "target/release/chipbox"
-
-      - name: Build archive
-        shell: bash
-        run: |
-          mkdir archive
-          cd archive
-          cp "../target/release/chipbox" ./
-          tar -czf "chipbox.tar.gz" chipbox
+        run: cargo build --verbose --release --target x86_64-unknown-linux-musl
 
       - name: Upload archive
         uses: actions/upload-artifact@v4
         with:
-          name: chipbox.tar.gz
-          path: archive/chipbox.tar.gz
+          name: chipbox
+          path: target/x86_64-unknown-linux-musl/release/chipbox
