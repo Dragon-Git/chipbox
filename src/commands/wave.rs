@@ -16,8 +16,9 @@ impl WaveCommand {
         if let Some(filelist) = &self.filelist {
             println!("filelist is{}", filelist.display());
         }
-        std::process::Command::new("ls")
-            .arg(self.path.clone())
+        std::process::Command::new("verdi")
+            .arg("-q -nologo -dbdir simv.daidir -ssf top.fsdb")
+            .current_dir(self.path.clone())
             .spawn()
             .expect("ls command failed to start");
     }
