@@ -46,7 +46,14 @@ impl WaveCommand {
             }
         }
         std::process::Command::new("verdi")
-            .args(["-q", "-nologo", "-dbdir", daidir.as_ref(), "-ssf", "top.fsdb"])
+            .args([
+                "-q",
+                "-nologo",
+                "-dbdir",
+                daidir.as_ref(),
+                "-ssf",
+                "top.fsdb",
+            ])
             .current_dir(self.path.clone())
             .spawn()
             .expect("verdi command failed to start\n");
