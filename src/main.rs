@@ -1,8 +1,8 @@
 mod commands;
 
-use std::borrow::BorrowMut;
 use clap::{CommandFactory, Parser, Subcommand};
 use commands::{SimCommand, WaveCommand, CompletionCommand};
+use std::borrow::BorrowMut;
 
 #[derive(Parser)]
 #[command(version, about, long_about = None, after_help = "Type 'chipbox <SUBCOMMAND> -h' for more information about a subcommand")]
