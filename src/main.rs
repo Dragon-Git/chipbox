@@ -1,7 +1,7 @@
 mod commands;
 
 use clap::{CommandFactory, Parser, Subcommand};
-use commands::{SimCommand, WaveCommand, CompletionCommand};
+use commands::{CompletionCommand, SimCommand, WaveCommand};
 use std::borrow::BorrowMut;
 
 #[derive(Parser)]
