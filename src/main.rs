@@ -1,10 +1,11 @@
 mod commands;
 
-use clap::{Parser, Subcommand};
-use commands::{SimCommand, WaveCommand};
+use std::borrow::BorrowMut;
+use clap::{CommandFactory, Parser, Subcommand};
+use commands::{SimCommand, WaveCommand, CompletionCommand};
 
 #[derive(Parser)]
-#[command(version, about, long_about = None)]
+#[command(version, about, long_about = None, after_help = "Type 'chipbox <SUBCOMMAND> -h' for more information about a subcommand")]
 pub struct Cli {
     #[command(subcommand)]
     pub command: Option<Commands>,
@@ -16,6 +17,8 @@ pub enum Commands {
     Sim(SimCommand),
     /// Waveform command
     Wave(WaveCommand),
+    /// Completion command
+    Completion(CompletionCommand),
 }
 
 fn main() {
@@ -23,6 +26,7 @@ fn main() {
     match cli.command {
         Some(Commands::Sim(sim)) => sim.run(),
         Some(Commands::Wave(wave)) => wave.run(),
+        Some(Commands::Completion(completion)) => completion.run(Cli::command().borrow_mut()),
         None => println!("No command specified, Please use -h for help"),
     }
 }
