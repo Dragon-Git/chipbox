@@ -1,7 +1,6 @@
 name: Create/update tag
 on:
-  push:
-    branch: "main"
+  workflow_dispatch:
 jobs:
   create-tag:
     runs-on: ubuntu-latest
@@ -17,5 +16,4 @@ jobs:
           message: "Latest release"
 
       # Print result using the env variable.
-      - run: |
-        echo "Tag already present"
+      - run: echo "Tag already present"
