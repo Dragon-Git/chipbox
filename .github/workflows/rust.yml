@@ -45,6 +45,7 @@ jobs:
           path: target/x86_64-unknown-linux-musl/release/chipbox
 
   publish:
+    needs: [build]
     runs-on: ubuntu-latest
     if: github.event_name == 'workflow_dispatch'
     permissions:
