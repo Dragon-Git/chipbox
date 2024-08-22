@@ -14,7 +14,7 @@ pub struct LintCommand {
 impl LintCommand {
     pub fn run(&self) {
         std::process::Command::new("jg")
-            .args(["-lint", "-nogui", self.path.to_str().expect("Invalid path")])
+            .args(["-superlint", "-nogui", self.path.to_str().expect("Invalid path")])
             .current_dir(".")
             .spawn()
             .expect("jaspergold command failed to start\n");
